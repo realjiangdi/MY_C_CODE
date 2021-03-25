@@ -1,2 +1,1 @@
-baes on k&r holy c bible
-
+Here is practice repo for myself
