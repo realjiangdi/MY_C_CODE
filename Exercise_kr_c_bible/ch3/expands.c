@@ -52,25 +52,22 @@ static int expands1(char *src, char *dst)
 
 static int expands(char *src, char *dst)
 {
-    int ch ;
-    while( *src != '\0'){
-        if(*src >= 'a' && *src <= 'z'){
-            ch = *src;
-            *dst = ch;
-            while(*(src +1) == '-'){
-                src+=2;
-                while(*dst != *src){
-                    dst++;
-                    ch++;
-                    *dst =ch;
-                }
-
+    int ch,i,j;
+    
+    i=j=ch=0;
+    
+    while((ch = src[i++]) != '\0'){
+        if(src[i] == '-' && src[i+1] >= ch){
+            i++;
+            while(ch < src[i]){
+                dst[j++] = ch++;
             }
-
         }
-
+        else
+        {
+            dst[j++] = ch;
+        }
     }
-
     return 0;
 }
 int main(int argc, char **argv)
@@ -86,20 +83,20 @@ int main(int argc, char **argv)
     expands(acTestBuf1, str);
     printf("After expand is :%s\n", str);
 
-    // memset(str, 0, sizeof(str));
-    // printf("expand testbuf2:%s\n", acTestBuf2);
-    // expands(acTestBuf2, str);
-    // printf("After expand is :%s\n", str);
+    memset(str, 0, sizeof(str));
+    printf("expand testbuf2:%s\n", acTestBuf2);
+    expands(acTestBuf2, str);
+    printf("After expand is :%s\n", str);
 
-    // memset(str, 0, sizeof(str));
-    // printf("expand testbuf3:%s\n", acTestBuf3);
-    // expands(acTestBuf3, str);
-    // printf("After expand is :%s\n", str);
+    memset(str, 0, sizeof(str));
+    printf("expand testbuf3:%s\n", acTestBuf3);
+    expands(acTestBuf3, str);
+    printf("After expand is :%s\n", str);
 
-    // memset(str, 0, sizeof(str));
-    // printf("expand testbuf4:%s\n", acTestBuf4);
-    // expands(acTestBuf4, str);
-    // printf("After expand is :%s\n", str);
+    memset(str, 0, sizeof(str));
+    printf("expand testbuf4:%s\n", acTestBuf4);
+    expands(acTestBuf4, str);
+    printf("After expand is :%s\n", str);
 
     return 0;
 }
