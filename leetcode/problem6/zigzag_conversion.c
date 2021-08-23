@@ -2,34 +2,34 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <stdbool.h>
 char * convert(char * s, int numRows){
 	char *ZagString = NULL;
 	int length = strlen(s);
 	int index[numRows];
 	char acStr[numRows][length];
 	int i,j,sign;
+	bool goingdown = false;
 	i=j=0;
 	sign = 1;
 	/* printf("strlength = %d\n",length); */
 	memset(index,0,sizeof(index));
 	while(*(s+i) != '\0'){
-		if(j==0)
-			sign = 1;
-		if(j==(numRows - 1))
-			sign = -1;
+
 		
-		/* printf("j=%d\n",j); */
+		printf("j=%d\n",j);
 		
 		acStr[j][index[j]] = *(s+i);
 		index[j]++;
 		
+		if(j==0 || j==(numRows - 1) )
+			goingdown = !goingdown;
 		
-		
-		if(sign == 1)
+		j+=(goingdown ? 1 : -1);
+	/* 	if(sign == 1)
 			j++;
 		else
-			j--;
+			j--; */
 		i++;
 	}
 	for(i=0;i<numRows;i++){
